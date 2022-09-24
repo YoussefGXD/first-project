@@ -16,12 +16,10 @@ app.post("/register",(req , res)=>{
         data: users
     })
 })
-let login = []
 app.post("/login" , (req, res)=>{
     const {first , last} = req.body
-    login.push({first , last})
     for(let i = 0 ; i < users.length ; i++){
-        if (users[i].firstName === login[i].first && users[i].lastName === login[i].last){
+        if (users[i].firstName === first && users[i].lastName === last){
             res.status(200).json({
                 massage:"login successfully"
             })
