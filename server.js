@@ -18,6 +18,7 @@ app.post("/register",(req , res)=>{
 })
 app.post("/login" , (req, res)=>{
     const {first , last} = req.body
+
     for(let i = 0 ; i < users.length ; i++){
         if (users[i].firstName === first && users[i].lastName === last){
             res.status(200).json({
@@ -25,12 +26,11 @@ app.post("/login" , (req, res)=>{
             })
         
         }
-        else{
-         res.status(400).json({
-            massage:"something is wrong"
-            
-         })
-        }
+        
     }
+    res.status(400).json({
+        massage:"something is wrong"
+        
+     })
 })
 app.listen(port , (req , res)=>{})
