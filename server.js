@@ -20,20 +20,39 @@ app.post("/register",(req , res)=>{
 app.patch ("/users/:id", (req , res) => {
     let id = req.params.id.slice(1)
     const {firstName , lastName} = req.body
-    users.forEach((x) =>{
-        if (x.id == id ){
-            x.firstName = firstName
-            x.lastName = lastName
+    for(let i =0 ; i < users.length ; i++){
+        if (users[i].id == id ){
+            users[i].firstName = firstName
+            users[i].lastName = lastName
             res.status(200).json({
                 massage: "edit complete",
-                data : x
+                data : users[i]
             })
         }
-    })
+    }
     res.status(400).json({
         massage: "Not found"
     })
 })
+
+app.delete ("/users/:id", (req , res) => {
+    let id = req.params.id.slice(1)
+    for(let i =0 ; i < users.length ; i++){
+        if (users[i].id == id ){
+            users.splice(i,1)
+            res.status(200).json({
+                massage: "successfully deleted",
+                data : users
+            })
+        }
+    }
+    res.status(400).json({
+        massage: "Not found"
+    })
+})
+
+
+
 app.post("/login" , (req, res)=>{
     const {firstName , lastName} = req.body
 
